@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>3T</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="./script.js" defer></script>
+  </head>
+  <body>
+    <div class="container-supremeth">
+      <div class="header">
+        <h1>Tic Tac Toe</h1>
+      </div>
+      <main>
+        <div class="info">
+          <p class="turn-text">Turn: <span class="turn-value"></span></p>
+          <button class="restart-btn btn">Restart</button>
+        </div>
+        <div class="board">
+          <div class="cell empty" data-x="0" data-y="0"></div>
+          <div class="cell empty" data-x="0" data-y="1"></div>
+          <div class="cell empty" data-x="0" data-y="2"></div>
+          <div class="cell empty" data-x="1" data-y="0"></div>
+          <div class="cell empty" data-x="1" data-y="1"></div>
+          <div class="cell empty" data-x="1" data-y="2"></div>
+          <div class="cell empty" data-x="2" data-y="0"></div>
+          <div class="cell empty" data-x="2" data-y="1"></div>
+          <div class="cell empty" data-x="2" data-y="2"></div>
+        </div>
+      </main>
+      <div class="game-over-text"></div>
+      <div class="modal-background">
+        <div class="modal">
+          <form action="#" id="player-names-form">
+            <div class="form-control">
+              <label for="playerX">Player X</label>
+              <input type="text" id="playerX" placeholder="Name" />
+            </div>
+            <div class="form-control">
+              <label for="playerO">Player O</label>
+              <input type="text" id="playerO" placeholder="Name" />
+            </div>
+            <button class="start-btn btn">Start</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
