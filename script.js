@@ -214,6 +214,8 @@ const domObj = (function () {
         cell.classList.remove("win");
         cell.classList.add("empty");
       });
+      gameOverDiv.textContent = ``;
+      gameOverDiv.classList.add("hidden");
       const player = game.getPlayerByChar(game.getTurn());
       turnElem.textContent = player.name;
       render();
@@ -251,6 +253,7 @@ const domObj = (function () {
     });
 
     if (game.isGameOver()) {
+      gameOverDiv.classList.remove("hidden");
       if (game.getWinner() === config.neutralChar) {
         gameOverDiv.textContent = `It is a tie!`;
       } else {
@@ -260,8 +263,6 @@ const domObj = (function () {
           cellArr[cellIdx].classList.add("win");
         });
       }
-    } else {
-      gameOverDiv.textContent = ``;
     }
 
   }

@@ -3,7 +3,7 @@
 A game of Tic Tac Toe implemented with the help of classic HTML, CSS, JS. Made use of the JS Module pattern and Factory functions to put the logic into place.
 Only player vs player mode available so far and player X always goes first, at the moment. Inputting player names is optional.
 
-![sign-up form screenshot](https://i.imgur.com/pdDKIp0.png)
+![sign-up form screenshot](https://i.imgur.com/lOV2k7a.png)
 
  Click [here](https://isimeri.github.io/odin-tic-tac-toe/) for a live preview.
 

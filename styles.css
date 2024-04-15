@@ -81,7 +81,6 @@ main{
   width: 260px;
   flex-shrink: 0;
 }
-
 .info{
   width: 260px;
   border: 2px dotted var(--red15);
@@ -98,7 +97,9 @@ main{
   word-break: break-all;
   font-weight: 700;
 }
-
+.game-over-text.hidden{
+  display: none;
+}
 .game-over-text {
   font-size: 1.5rem;
   text-align: center;
