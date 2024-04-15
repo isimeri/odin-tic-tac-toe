@@ -49,11 +49,12 @@ const Player = function (name, char) {
 };
 
 const game = (function () {
-  let winner, gameOver, filledCells, turn, player1, player2;
+  let winner, gameOver, filledCells, turn, player1, player2, winPattern;
 
   function init(p1, p2) {
     winner = config.neutralChar;
     gameOver = false;
+    winPattern = null;
     filledCells = 0;
     gameboard.clearBoard();
     player1 = p1;
@@ -80,6 +81,9 @@ const game = (function () {
   function getTurn(){
     return turn;
   }
+  function getWinPattern(){
+    return winPattern;
+  }
 
   function getPlayerByChar(char) {
     if (player1.char === char) {
@@ -105,40 +109,19 @@ const game = (function () {
 
   function checkForWin() {
     const board = gameboard.getBoard();
+    const winPatterns = [
+      [0,1,2], [3,4,5], [6,7,8],
+      [0,3,6], [1,4,7], [2,5,8],
+      [0,4,8], [2,4,6]
+    ]
 
-    //rows and columns check
-    for (let i = 0; i < 3; i++) {
-      if (
-        !gameOver &&
-        board[i][0] !== config.neutralChar &&
-        board[i][0] === board[i][1] &&
-        board[i][1] === board[i][2]
-      ) {
+    winPatterns.forEach(pattern => {
+      if(!gameOver && board[Math.floor((pattern[0])/3)][pattern[0]%3] !== config.neutralChar && board[Math.floor((pattern[0])/3)][pattern[0]%3] === board[Math.floor((pattern[1])/3)][pattern[1]%3] && board[Math.floor((pattern[0])/3)][pattern[0]%3] === board[Math.floor((pattern[2])/3)][pattern[2]%3]){
         winner = getPlayerByChar(turn);
         gameOver = true;
+        winPattern = pattern;
       }
-      if (
-        !gameOver &&
-        board[0][i] !== config.neutralChar &&
-        board[0][i] === board[1][i] &&
-        board[1][i] === board[2][i]
-      ) {
-        winner = getPlayerByChar(turn);
-        gameOver = true;
-      }
-    }
-    //diagonals check
-    if (
-      (board[0][0] === board[1][1] &&
-        board[1][1] === board[2][2] &&
-        board[1][1] !== config.neutralChar) ||
-      (board[0][2] === board[1][1] &&
-        board[2][0] === board[1][1] &&
-        board[1][1] !== config.neutralChar)
-    ) {
-      winner = getPlayerByChar(turn);
-      gameOver = true;
-    }
+    });
 
     if (gameOver) {
       handleGameOver();
@@ -187,6 +170,7 @@ const game = (function () {
     // showBoard: showBoard,
     isGameOver: isGameOver,
     getWinner: getWinner,
+    getWinPattern: getWinPattern,
     getTurn: getTurn,
     getPlayerByChar: getPlayerByChar,
     init: init,
@@ -226,6 +210,10 @@ const domObj = (function () {
 
     restartBtn.addEventListener("click", (e) => {
       game.init(p1, p2);
+      cellArr.forEach(cell => {
+        cell.classList.remove("win");
+        cell.classList.add("empty");
+      });
       const player = game.getPlayerByChar(game.getTurn());
       turnElem.textContent = player.name;
       render();
@@ -267,6 +255,10 @@ const domObj = (function () {
         gameOverDiv.textContent = `It is a tie!`;
       } else {
         gameOverDiv.textContent = `${game.getWinner().name} is the winner!`;
+        const winPattern = game.getWinPattern();
+        winPattern.forEach(cellIdx => {
+          cellArr[cellIdx].classList.add("win");
+        });
       }
     } else {
       gameOverDiv.textContent = ``;

@@ -3,14 +3,24 @@
   padding: 0;
   box-sizing: border-box;
 }
+:root{
+  --red1: hsl(0, 50%, 14%);
+  --red15: hsl(0, 50%, 34%);
+  --red2: hsl(356, 53%, 61%);
+  --whitey: #fdf0d5;
+  --blue1: hsl(201, 100%, 9%);
+  --blue15: hsl(201, 100%, 24%);
+  --blue2: hsl(203, 39%, 57%);
+}
 body {
   font-family: "Kode Mono", monospace;
 }
 .container-supremeth {
   min-height: 100vh;
   padding-top: 10vh;
-  background-color: #121;
-  color: #adb;
+  /* background-color: #121; */
+  background-color: var(--red1);
+  color: var(--whitey);
 }
 .header {
   display: flex;
@@ -24,16 +34,16 @@ h1 {
   text-align: center;
 }
 main{
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  display: flex;
+  justify-content: center;
   gap: 1rem;
   margin-bottom: 2rem;
 }
 .btn {
   border: none;
   padding: 0.5rem 1.5rem;
-  background-color: #3b9;
-  color: #121;
+  background-color: var(--red2);
+  color: var(--blue1);
   font-family: inherit;
   font-size: 1rem;
   font-weight: bold;
@@ -42,36 +52,47 @@ main{
 }
 .btn:hover{
   cursor: pointer;
-  background-color: hsl(165, 57%, 67%);
+  background-color: var(--blue2);
 }
 .board {
-  grid-column: 5/9;
   display: grid;
   grid-template-columns: repeat(3, 150px);
   grid-template-rows: repeat(3, 150px);
-  margin: 0 auto;
   justify-content: center;
+  flex-shrink: 0;
 }
 .cell {
-  border: 1px solid #adb;
+  border: 1px solid var(--red2);
   border-collapse: collapse;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 4rem;
+  user-select: none;
 }
 .cell.empty:hover {
   cursor: pointer;
-  background-color: #232;
+  background-color: var(--red15);
+}
+.cell.win{
+  background-color: var(--blue15);
+}
+.aux{
+  width: 260px;
+  flex-shrink: 0;
 }
 
 .info{
-  grid-column: 3/5;
-  border: 2px dotted hsla(152, 57%, 47%, 0.658);
-  padding:1rem;
+  width: 260px;
+  border: 2px dotted var(--red15);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-shrink: 0;
+}
+.turn-text{
+  font-size: 1.2rem;
 }
 .turn-value{
   word-break: break-all;
@@ -81,6 +102,11 @@ main{
 .game-over-text {
   font-size: 1.5rem;
   text-align: center;
+  padding: 0.5rem;
+  max-width: 450px;
+  margin: 0 auto;
+  background-color: var(--blue15);
+
 }
 
 /* ============names-modal============== */
@@ -98,7 +124,7 @@ main{
 }
 .modal {
   padding: 1rem;
-  background-color: #143;
+  background-color: var(--red1);
   min-width: 400px;
 }
 #player-names-form{
